@@ -3,35 +3,35 @@
     "model": "digestapi.category",
     "pk": 1,
     "fields": {
-      "name": "Science Fiction/Fantasy"
+      "type": "Science Fiction/Fantasy"
     }
   },
   {
     "model": "digestapi.category",
     "pk": 2,
     "fields": {
-      "name": "Horror"
+      "type": "Horror"
     }
   },
   {
     "model": "digestapi.category",
     "pk": 3,
     "fields": {
-      "name": "Mystery"
+      "type": "Mystery"
     }
   },
   {
     "model": "digestapi.category",
     "pk": 4,
     "fields": {
-      "name": "Non-Fiction"
+      "type": "Non-Fiction"
     }
   },
   {
     "model": "digestapi.category",
     "pk": 5,
     "fields": {
-      "name": "True-Crime"
+      "type": "True-Crime"
     }
   }
 ]
