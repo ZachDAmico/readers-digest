@@ -1,3 +1,5 @@
 from .users import UserViewSet
-from .books import BookViewSet
-from .categories import CategoryViewSet
+from .books_view import BookViewSet
+from .categories_view import CategoryViewSet
+from .reviews_view import ReviewViewSet
+
