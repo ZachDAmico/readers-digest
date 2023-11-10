@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from digestapi.views import UserViewSet, BookViewSet, CategoryViewSet
+from digestapi.views import UserViewSet, BookViewSet, CategoryViewSet, ReviewViewSet
 
 router = DefaultRouter(trailing_slash=False)
 router.register(r'books', BookViewSet, 'book')
 router.register(r'categories', CategoryViewSet, 'category')
+router.register(r'reviews', ReviewViewSet, 'review')
 
 urlpatterns = [
     path('', include(router.urls)),

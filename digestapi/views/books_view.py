@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from digestapi.models import Book
-from .categories import CategorySerializer
+from .categories_view import CategorySerializer
 
 
     # Override default serialization to replace foreign keys
@@ -11,8 +11,8 @@ from .categories import CategorySerializer
     # need to serialize regardless of relationship so Django can accurately convert into Python data and rendered into JSON
 class BookSerializer(serializers.ModelSerializer):
 
+    # Both Declare that an ad-hoc property that isn't directly on Book model and should be included in JSON
     categories = CategorySerializer(many=True)
-    # Declare that an ad-hoc property should be included in JSON
     is_owner = serializers.SerializerMethodField()
 
     # Function containing instructions for ad-hoc property
@@ -22,7 +22,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'author', 'isbn_number', 'cover_image', 'is_owner', 'categories']
+        fields = ['id', 'title', 'author', 'isbn_number', 'img_url', 'is_owner', 'categories']
 
 
 class BookViewSet(viewsets.ViewSet):
@@ -48,7 +48,7 @@ class BookViewSet(viewsets.ViewSet):
         title = request.data.get('title')
         author = request.data.get('author')
         isbn_number = request.data.get('isbn_number')
-        cover_image = request.data.get('cover_image')
+        img_url = request.data.get('img_url')
 
         # Create a book database row first, so you have a
         # primary key to work with
@@ -56,7 +56,7 @@ class BookViewSet(viewsets.ViewSet):
             user=request.user,
             title=title,
             author=author,
-            cover_image=cover_image,
+            img_url=img_url,
             isbn_number=isbn_number)
 
 # categories is initially an array(with integers inside) in the JSON request body
@@ -82,7 +82,7 @@ class BookViewSet(viewsets.ViewSet):
                 book.title = serializer.validated_data['title']
                 book.author = serializer.validated_data['author']
                 book.isbn_number = serializer.validated_data['isbn_number']
-                book.cover_image = serializer.validated_data['cover_image']
+                book.img_url = serializer.validated_data['img_url']
                 book.save()
 
                 category_ids = request.data.get('categories', [])
